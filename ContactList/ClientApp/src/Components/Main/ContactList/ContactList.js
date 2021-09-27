@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 // Import API Service
 import apiService from "../../../Services/APIService";
 // Import actions
-import { UpdateContactList, SetCurrentContact ,DeleteContact} from "../../../Actions/ContactListActions";
+import { UpdateContactList, SetCurrentContact} from "../../../Actions/ContactListActions";
 import Contactitem from "./ContactItem/ContactItem";
 
 // Import components
@@ -16,12 +16,11 @@ class ContactList extends Component {
     this._DeleteContact = this._SetCurrentContact.bind(this);   
   }
   componentDidMount() {
-    if(this.props.ContactList==null)
-    {
+    console.log("111",this.props);
       apiService.GetContactList().then((contactList) => {
         this.props.UpdateContactList(contactList);
       });
-    }
+    console.log("111",this.props);
   }
   _DeleteContact(e) {
     const index = this.props.ContactList.findIndex(
@@ -30,7 +29,7 @@ class ContactList extends Component {
     const list = this.props.ContactList
     list.splice(index, 1);
     apiService.updateDatabse(list);
-    this.props.DeleteContact(list);
+    this.props.UpdateContactList(list);
   }
 
   _SetCurrentContact(Id) {
@@ -70,7 +69,6 @@ const mapStateToProps = ({ ContactListReducer }) => {
 const mapDispatchToProps = {
   UpdateContactList,
   SetCurrentContact,
-  DeleteContact,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);

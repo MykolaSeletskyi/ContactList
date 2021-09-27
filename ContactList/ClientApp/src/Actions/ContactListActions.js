@@ -1,20 +1,7 @@
 export const UpdateContactList = (contactList) => {
+    console.log("UPDATE_CONTACT_LIST",contactList)
     return {
         type: "UPDATE_CONTACT_LIST",
-        payload: contactList
-    }
-}
-
-export const editContact = (contactList) => {
-    return {
-        type: "EDIT_CONTACT",
-        payload: contactList
-    }
-}
-
-export const DeleteContact = (contactList) => {
-    return {
-        type: "DELETE_CONTACT",
         payload: contactList
     }
 }

@@ -1,6 +1,6 @@
 import { Component, Fragment } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { editContact } from "../../Actions/ContactListActions";
+import { UpdateContactList } from "../../Actions/ContactListActions";
 import { connect } from "react-redux";
 import apiService from "../../Services/APIService"
 
@@ -76,11 +76,11 @@ class EditContact extends Component {
             Status,
             Image,
         }
-        const index = this.props.ContactList.findIndex(elem => elem.Id === Id);
-        this.props.ContactList[index]=NewContact;
+        const newList = this.props.ContactList.slice();
+        const index = newList.findIndex(elem => elem.Id === Id);
+        newList[index]=NewContact;
+        this.props.UpdateContactList(newList);
         apiService.EditContact(NewContact);
-        console.log("NewContact",NewContact);
-        //this.props.UpdateContactList(this.props.ContactList);
         this.setState({
             isRedirect: true
         })
@@ -180,6 +180,6 @@ const mapStateToProps = ({ContactListReducer}) => {
 };
 const mapDispatchToProps=
 {
-    editContact
+    UpdateContactList
 }
 export default connect(mapStateToProps,mapDispatchToProps)(EditContact);
