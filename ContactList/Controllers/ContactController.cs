@@ -48,9 +48,9 @@ namespace ContactList.Controllers
             }
             return Ok();
         }
-        
+
         [HttpDelete("delete-contact")]
-        public IActionResult DeleteContact(int Id)
+        public IActionResult DeleteContact([FromBody] int Id)
         {
             var _contact = _db.Contacts.FirstOrDefault(n => n.Id == Id);
             _db.Contacts.Remove(_contact);

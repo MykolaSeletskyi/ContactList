@@ -13,23 +13,22 @@ class ContactList extends Component {
   {
     super(props);
     this._SetCurrentContact = this._SetCurrentContact.bind(this); 
-    this._DeleteContact = this._SetCurrentContact.bind(this);   
+    this.DeleteContact = this.DeleteContact.bind(this);   
   }
   componentDidMount() {
-    console.log("111",this.props);
+    if(this.props.ContactList.length===0)
+    {
       apiService.GetContactList().then((contactList) => {
         this.props.UpdateContactList(contactList);
       });
-    console.log("111",this.props);
+    }
   }
-  _DeleteContact(e) {
-    const index = this.props.ContactList.findIndex(
-      (item) =>{console.log(item); return item.Id === e.currentTarget.id}
-    );
-    const list = this.props.ContactList
-    list.splice(index, 1);
-    apiService.updateDatabse(list);
-    this.props.UpdateContactList(list);
+  DeleteContact(Id) {
+    const newList = this.props.ContactList.slice()
+    const index = newList.findIndex((item) => item.Id === Id);
+    newList.splice(index,1);
+    apiService.DeleteContact(Id);
+    this.props.UpdateContactList(newList);
   }
 
   _SetCurrentContact(Id) {
@@ -39,14 +38,14 @@ class ContactList extends Component {
      const currentContact = this.props.ContactList[index];
      this.props.SetCurrentContact(currentContact);
   }
-  render() {
+  render() {          
     if (this.props.ContactList?.length > 0) {
       return this.props.ContactList.map((item) => {
         return (
           <Contactitem
             key={item.Id}
             {...item}
-            DeleteContact={this._DeleteContact}
+            DeleteContact={this.DeleteContact}
             SetCurrentContact={this._SetCurrentContact}
           />
         );

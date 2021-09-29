@@ -33,7 +33,7 @@ const ContactItem = ({ Id,Name, Email, Phone, Status, Image, Gender, DeleteConta
             </div>
             <div className="icons">
                 <Link to="/edit-contact"><i id={Id} className="far fa-edit fa-2x" onClick={()=>SetCurrentContact(Id)}></i></Link>
-                <i id={Id} className="far fa-trash-alt fa-2x" onClick={DeleteContact}></i>
+                <i className="far fa-trash-alt fa-2x" onClick={()=>DeleteContact(Id)}></i>
             </div>
         </div >
     )

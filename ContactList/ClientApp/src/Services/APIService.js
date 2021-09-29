@@ -10,16 +10,14 @@ class ContactListService {
             List: [],
           };
         } else {
-          return {
-            List: data,
-          };
+          return data;
         }
       })
       .catch((err) => console.log(err));
     return List;
   }
 
-   AddContact(contact) {
+  AddContact(contact) {
       fetch("/Contact/add-contact", {
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +29,7 @@ class ContactListService {
       .catch((res) => console.log(res));
   }
 
-   EditContact(contact) {
+  EditContact(contact) {
      fetch("/Contact/edit-contact", {
      headers: {
        "Content-Type": "application/json",
@@ -42,6 +40,18 @@ class ContactListService {
      .then((res) => console.log(res))
      .catch((res) => console.log(res));
  }
+
+ DeleteContact(Id) {
+  fetch("/Contact/delete-contact", {
+  headers: {
+    "Content-Type": "application/json",
+  },
+  method: "DELETE",
+  body: JSON.stringify(Id),
+})
+  .then((res) => console.log(res))
+  .catch((res) => console.log(res));
+}
 }
 
 const apiService = new ContactListService();

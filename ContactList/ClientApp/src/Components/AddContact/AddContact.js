@@ -71,7 +71,6 @@ class AddContact extends Component {
             Image,
         }
         this.props.ContactList.push(NewContact);
-        console.log("Contact list",this.props.ContactList);
         this.props.UpdateContactList(this.props.ContactList);
         apiService.AddContact(NewContact);
         this.setState({

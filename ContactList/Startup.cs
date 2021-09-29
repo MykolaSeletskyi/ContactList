@@ -35,9 +35,7 @@ namespace ContactList
             services.AddDbContext<AppDbContext>(options =>
               options.UseSqlServer(
                   Configuration.GetConnectionString("DefaultConnection")));
-         
             services.AddTransient<ContactController>();
-          
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
